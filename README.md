@@ -7,27 +7,27 @@ This filter can also parse data with any separator, not just commas.
 
 
 ```
-PUT _ingest/pipeline/opennlp-pipeline
+PUT _ingest/pipeline/csv-pipeline
 {
   "description": "A pipeline to do whatever",
   "processors": [
     {
       "csv" : {
         "field" : "my_field",
-        "columnes" : ["a", "b"]
+        "columns" : ["a", "b"]
       }
     }
   ]
 }
 
-PUT /my-index/my-type/1?pipeline_id=opennlp-pipeline
+PUT /my-index/my-type/1?pipeline=csv-pipeline
 {
   "my_field" : "a_value,b_value"
 }
 
 GET /my-index/my-type/1
 {
-  "my_field" : "a_value,b_value"
+  "my_field" : "a_value,b_value",
   "a" : "a_value",
   "b" : "b_value"
 }
