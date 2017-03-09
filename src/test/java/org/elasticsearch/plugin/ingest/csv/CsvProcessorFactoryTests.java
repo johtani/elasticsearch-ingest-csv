@@ -34,7 +34,7 @@ public class CsvProcessorFactoryTests extends ESTestCase {
     private static List<String> defaultColumns;
 
     @BeforeClass
-    public static void defaultSettings() {
+    private static void defaultSettings() {
         defaultColumns = new ArrayList<>();
         defaultColumns.add("a");
         defaultColumns.add("b");
