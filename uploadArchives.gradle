@@ -1,0 +1,58 @@
+String askPassword(prompt) {
+    "${System.console().readPassword(prompt)}"
+}
+ext.'signing.password' = askPassword("Enter password for PGP key ${property('signing.keyId')}: ")
+ext.'sonatypePassword' = askPassword("Enter password for ${sonatypeUsername}@oss.sonatype.org: ")
+
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: sonatypeUsername, password: sonatypePassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: sonatypeUsername, password: sonatypePassword)
+            }
+
+            pom.project {
+                name 'Elasticsearch Ingest CSV Plugin'
+                packaging 'zip'
+                artifactId 'ingest-csv'
+                description 'Ingest CSV processor parses CSV data and stores it as individual fields'
+                url 'https://github.com/johtani/elasticsearch-ingest-csv'
+
+                scm {
+                    connection 'scm:git:https://github.com/johtani/elasticsearch-ingest-csv'
+                    developerConnection 'scm:git:git@github.com:johtani/elasticsearch-ingest-csv.git'
+                    url 'https://github.com/johtani/elasticsearch-ingest-csv'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'johtani'
+                        name 'Jun Ohtani'
+                    }
+                }
+            }
+        }
+    }
+}

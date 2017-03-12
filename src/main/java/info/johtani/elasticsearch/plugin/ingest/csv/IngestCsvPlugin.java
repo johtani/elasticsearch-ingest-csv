@@ -15,16 +15,13 @@
  *
  */
 
-package org.elasticsearch.plugin.ingest.csv;
+package info.johtani.elasticsearch.plugin.ingest.csv;
 
 import org.elasticsearch.common.collect.MapBuilder;
-import org.elasticsearch.common.settings.Setting;
 import org.elasticsearch.ingest.Processor;
 import org.elasticsearch.plugins.IngestPlugin;
 import org.elasticsearch.plugins.Plugin;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 public class IngestCsvPlugin extends Plugin implements IngestPlugin {

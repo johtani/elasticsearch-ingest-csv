@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package org.elasticsearch.plugin.ingest.csv;
+package info.johtani.elasticsearch.plugin.ingest.csv;
 
 
 import org.elasticsearch.ElasticsearchParseException;

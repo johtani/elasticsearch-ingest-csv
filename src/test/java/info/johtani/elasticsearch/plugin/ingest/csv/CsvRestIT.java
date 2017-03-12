@@ -15,7 +15,7 @@
  *
  */
 
-package org.elasticsearch.plugin.ingest.csv;
+package info.johtani.elasticsearch.plugin.ingest.csv;
 
 import com.carrotsearch.randomizedtesting.annotations.Name;
 import com.carrotsearch.randomizedtesting.annotations.ParametersFactory;

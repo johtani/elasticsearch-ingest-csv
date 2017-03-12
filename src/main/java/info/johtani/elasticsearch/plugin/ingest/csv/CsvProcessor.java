@@ -15,7 +15,7 @@
  *
  */
 
-package org.elasticsearch.plugin.ingest.csv;
+package info.johtani.elasticsearch.plugin.ingest.csv;
 
 import com.univocity.parsers.csv.CsvParser;
 import com.univocity.parsers.csv.CsvParserSettings;

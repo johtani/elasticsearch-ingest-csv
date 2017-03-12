@@ -15,7 +15,7 @@
  *
  */
 
-package org.elasticsearch.plugin.ingest.csv;
+package info.johtani.elasticsearch.plugin.ingest.csv;
 
 import org.elasticsearch.ingest.IngestDocument;
 import org.elasticsearch.ingest.RandomDocumentPicks;
