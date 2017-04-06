@@ -2,9 +2,9 @@
 
 This processor can parse CSV data and stores it as individual fields.
 This filter can also parse data with any separator, not just commas.
-Now it handles multiple patterns: it will consider the first one matching.
-At the moment, the key value of each map is not stored (for example `csv_pattern1`
-in the following example).
+It handles multiple patterns: it will consider the first one matching.
+At the moment, the key value of each map is not stored (for example `csv_pattern1`,
+`csv_pattern2` and `csv_pattern3` in the following example).
 
 ## Installation
 
