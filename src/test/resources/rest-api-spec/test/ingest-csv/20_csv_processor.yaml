@@ -10,7 +10,10 @@
               {
                 "csv" : {
                   "field" : "field1",
-                  "columns" : ["a", "b"]
+                  "columns" : {
+                    "csv1" : ["a","b"],
+                    "csv2" : ["c","d","e"]
+                  }
                 }
               }
             ]
