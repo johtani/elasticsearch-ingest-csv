@@ -22,6 +22,7 @@ import org.elasticsearch.test.ESTestCase;
 import org.junit.BeforeClass;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,13 +32,12 @@ import static org.hamcrest.Matchers.equalTo;
 public class CsvProcessorFactoryTests extends ESTestCase {
 
     private static final CsvProcessor.Factory factory = new CsvProcessor.Factory();
-    private static List<String> defaultColumns;
+    private static Map<String, List<String>> defaultColumns = new HashMap<String, List<String>>();
 
     @BeforeClass
     private static void defaultSettings() {
-        defaultColumns = new ArrayList<>();
-        defaultColumns.add("a");
-        defaultColumns.add("b");
+        defaultColumns.put( "csv1", new ArrayList<>( Arrays.asList("a","b") ) );
+        defaultColumns.put( "csv2", new ArrayList<>( Arrays.asList("c","d","e") ) );
     }
 
     private Map<String, Object> getDefaultConfig() {
@@ -99,7 +99,7 @@ public class CsvProcessorFactoryTests extends ESTestCase {
 
     public void testColumns() throws Exception {
         Map<String, Object> config = getDefaultConfig();
-        config.put("columns", new ArrayList<>());
+        config.put("columns", new HashMap<String, List<String>>() );
         String processorTag = randomAsciiOfLength(10);
 
         IllegalArgumentException e = expectThrows(IllegalArgumentException.class,
