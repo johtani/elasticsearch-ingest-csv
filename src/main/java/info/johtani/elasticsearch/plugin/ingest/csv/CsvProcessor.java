@@ -47,6 +47,7 @@ public class CsvProcessor extends AbstractProcessor {
         csvSettings = new CsvParserSettings();
         csvSettings.getFormat().setQuote(quoteChar);
         csvSettings.getFormat().setDelimiter(separator);
+        csvSettings.setMaxCharsPerColumn(32766);
     }
 
     @Override
