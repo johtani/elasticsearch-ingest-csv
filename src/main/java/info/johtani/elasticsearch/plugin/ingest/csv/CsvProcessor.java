@@ -27,8 +27,9 @@ import org.elasticsearch.ingest.Processor;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Iterator;
 
-import static org.elasticsearch.ingest.ConfigurationUtils.readList;
+import static org.elasticsearch.ingest.ConfigurationUtils.readMap;
 import static org.elasticsearch.ingest.ConfigurationUtils.readStringProperty;
 
 public class CsvProcessor extends AbstractProcessor {
@@ -36,39 +37,60 @@ public class CsvProcessor extends AbstractProcessor {
     public static final String TYPE = "csv";
 
     private final String field;
-    private final List<String> columns;
+    private final String keyField;
+    private final Map<String,List<String>> columns;
     private final CsvParserSettings csvSettings;
 
-    public CsvProcessor(String tag, String field, List<String> columns, char quoteChar, char separator) throws IOException {
+    public CsvProcessor(String tag, String field, Map<String, List<String>> columns, char quoteChar, char separator, String keyField)
+            throws IOException {
         super(tag);
         this.field = field;
+        this.keyField = keyField;
         this.columns = columns;
         csvSettings = new CsvParserSettings();
         csvSettings.getFormat().setQuote(quoteChar);
         csvSettings.getFormat().setDelimiter(separator);
+        csvSettings.setMaxCharsPerColumn(32766);
     }
 
     @Override
     public void execute(IngestDocument ingestDocument) throws Exception {
         String content = ingestDocument.getFieldValue(field, String.class);
 
-        if (Strings.hasLength(content)) {
-            CsvParser parser = new CsvParser(this.csvSettings);
-            String[] values = parser.parseLine(content);
-            if (values.length != this.columns.size()) {
-                // TODO should be error?
-                throw new IllegalArgumentException("field[" + this.field + "] size ["
-                    + values.length + "] doesn't match header size [" + columns.size() + "].");
-            }
-
-            for (int i = 0; i < columns.size(); i++) {
-                ingestDocument.setFieldValue(columns.get(i), values[i]);
-            }
-        } else {
-            // TODO should we have ignoreMissing flag?
+        if (!Strings.hasLength(content)) {
             throw new IllegalArgumentException("field[" + this.field + "] is empty string.");
         }
+        else {
 
+            CsvParser parser = new CsvParser(this.csvSettings);
+
+            for( Iterator< Map.Entry< String, List<String> > > it = columns.entrySet().iterator(); it.hasNext(); ) {
+
+                Map.Entry<String,List<String>> entry = it.next();
+                String[] values = parser.parseLine(content);
+
+                if (values.length != entry.getValue().size()) {
+                    if (it.hasNext()) {
+                        continue;
+                    }
+                    // TODO should be error?
+                    else {
+                        throw new IllegalArgumentException("field[" + this.field + "] size ["
+                            + values.length + "] doesn't match header size [" + entry.getValue().size() + "].");
+                    }
+                }
+                else {
+                    for ( int i=0; i<entry.getValue().size(); i++) {
+                        ingestDocument.setFieldValue(entry.getValue().get(i), values[i]);
+                    }
+                    if (!keyField.equals("")) {
+                        ingestDocument.setFieldValue(keyField, entry.getKey());
+                    }
+                    // Exit on the first matching pattern
+                    break;
+                }
+            }
+        }
     }
 
     @Override
@@ -80,7 +102,7 @@ public class CsvProcessor extends AbstractProcessor {
         return field;
     }
 
-    List<String> getColumns() {
+    Map<String, List<String>> getColumns() {
         return columns;
     }
 
@@ -94,7 +116,7 @@ public class CsvProcessor extends AbstractProcessor {
         public CsvProcessor create(Map<String, Processor.Factory> factories, String tag, Map<String, Object> config) 
             throws Exception {
             String field = readStringProperty(TYPE, tag, config, "field");
-            List<String> columns = readList(TYPE, tag, config, "columns");
+            Map<String, List<String>> columns = readMap( TYPE, tag, config, "columns");
             // FIXME should test duplicate name
             if (columns.size() == 0) {
                 throw new IllegalArgumentException("columns is missing");
@@ -107,8 +129,9 @@ public class CsvProcessor extends AbstractProcessor {
             if (Strings.isEmpty(separator) || separator.length() != 1) {
                 throw new IllegalArgumentException("separator must be a character, like , or TAB");
             }
+            String keyField = readStringProperty(TYPE, tag, config, "key_field", "");
 
-            return new CsvProcessor(tag, field, columns, quoteChar.charAt(0), separator.charAt(0));
+            return new CsvProcessor(tag, field, columns, quoteChar.charAt(0), separator.charAt(0), keyField);
         }
     }
 }
