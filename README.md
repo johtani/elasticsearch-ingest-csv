@@ -54,6 +54,7 @@ GET /my-index/my-type/1
 | columns  | Define multiple maps, each one with a list of column names. | Yes |
 | quote_char | Define the character used to quote CSV fields. If this is not specified the default is a double quote ". | No |
 | separator | Define the column separator value. If this is not specified, the default is a comma ,. | No |
+| key_field | Define the field where to save the key of the matching pattern in `columns`. If not specified, this field will not be saved. | No |
 
 ## Setup
 
