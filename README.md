@@ -2,9 +2,11 @@
 
 This processor can parse CSV data and stores it as individual fields.
 This filter can also parse data with any separator, not just commas.
-It handles multiple patterns: it will consider the first one matching.
-At the moment, the key value of each map is not stored (for example `csv_pattern1`,
-`csv_pattern2` and `csv_pattern3` in the following example).
+
+## Fork contribution
+
+In this version the processor handles multiple patterns: it will consider the first one matching.
+There is also an optional field, `key_field`, that allows to store the key value of the matching pattern.
 
 ## Installation
 
@@ -54,7 +56,7 @@ GET /my-index/my-type/1
 | columns  | Define multiple maps, each one with a list of column names. | Yes |
 | quote_char | Define the character used to quote CSV fields. If this is not specified the default is a double quote ". | No |
 | separator | Define the column separator value. If this is not specified, the default is a comma ,. | No |
-| key_field | Define the field where to save the key of the matching pattern in `columns`. If not specified, this field will not be saved. | No |
+| key_field | Define the field where to save the key value of the matching pattern in `columns` (for example `csv_pattern1`,`csv_pattern2` or `csv_pattern3` in the example). If not specified, this field will not be saved. | No |
 
 ## Setup
 
