@@ -14,6 +14,8 @@ There is also an optional field, `key_field`, that allows to store the key value
 | ---------- | ------- |
 | 5.3.0 | `./bin/elasticsearch-plugin install https://oss.sonatype.org/service/local/repositories/releases/content/info/johtani/elasticsearch/plugin/ingest/ingest-csv/5.3.0.0/ingest-csv-5.3.0.0.zip` |
 
+If you need to work on a different version, you can try to change the setting in `gradle.properties` before compiling. Use at your own risk!
+
 ## Usage
 
 
