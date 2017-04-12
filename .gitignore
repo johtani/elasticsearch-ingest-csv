@@ -1,27 +1,17 @@
-.idea/
-.gradle/
+.gradle
+.local*
 build/
-out/
-*.swp
-*-execution-hints.log
-*-execution-times.log
+gradlew
+gradle
 
-// ignore the downloaded model files in git
-src/test/resources/models/
+# Ignore Gradle GUI config
+gradle-app.setting
 
-// intellij
-*.iml
-*.ipr
-*.iws
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
 
-// eclipse
-.project
-.classpath
-eclipse-build
-*/.project
-*/.classpath
-*/eclipse-build
-.settings
-!/.settings/org.eclipse.core.resources.prefs
-!/.settings/org.eclipse.jdt.core.prefs
-!/.settings/org.eclipse.jdt.ui.prefs
+# Cache of project
+.gradletasknamecache
+
+# # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
+# gradle/wrapper/gradle-wrapper.properties
