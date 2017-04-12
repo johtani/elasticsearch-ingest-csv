@@ -72,5 +72,4 @@ If you need to work on a different version, you can try to change the setting in
 ## Bugs & TODO
 
 * Need more test, like using separator and quote_char 
-* and todos...
 
