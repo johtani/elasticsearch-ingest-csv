@@ -11,7 +11,7 @@ buildscript {
 }
 
 group = 'info.johtani.elasticsearch.plugin.ingest'
-version = "${elasticsearchVersion}.0"
+version = "${elasticsearchVersion}"
 
 apply plugin: 'java'
 apply plugin: 'elasticsearch.esplugin'
