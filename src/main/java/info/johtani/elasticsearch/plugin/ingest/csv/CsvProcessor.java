@@ -31,6 +31,7 @@ import java.util.Iterator;
 
 import static org.elasticsearch.ingest.ConfigurationUtils.readMap;
 import static org.elasticsearch.ingest.ConfigurationUtils.readStringProperty;
+import static org.elasticsearch.ingest.ConfigurationUtils.readIntProperty;
 
 public class CsvProcessor extends AbstractProcessor {
 
@@ -41,7 +42,8 @@ public class CsvProcessor extends AbstractProcessor {
     private final Map<String,List<String>> columns;
     private final CsvParserSettings csvSettings;
 
-    public CsvProcessor(String tag, String field, Map<String, List<String>> columns, char quoteChar, char separator, String keyField)
+    public CsvProcessor(String tag, String field, Map<String, List<String>> columns,
+            char quoteChar, char separator, String keyField, int maxChars)
             throws IOException {
         super(tag);
         this.field = field;
@@ -50,7 +52,7 @@ public class CsvProcessor extends AbstractProcessor {
         csvSettings = new CsvParserSettings();
         csvSettings.getFormat().setQuote(quoteChar);
         csvSettings.getFormat().setDelimiter(separator);
-        csvSettings.setMaxCharsPerColumn(32766);
+        csvSettings.setMaxCharsPerColumn(maxChars);
     }
 
     @Override
@@ -130,8 +132,9 @@ public class CsvProcessor extends AbstractProcessor {
                 throw new IllegalArgumentException("separator must be a character, like , or TAB");
             }
             String keyField = readStringProperty(TYPE, tag, config, "key_field", "");
+            int maxChars = readIntProperty(TYPE, tag, config, "max_chars", 32766);
 
-            return new CsvProcessor(tag, field, columns, quoteChar.charAt(0), separator.charAt(0), keyField);
+            return new CsvProcessor(tag, field, columns, quoteChar.charAt(0), separator.charAt(0), keyField, maxChars);
         }
     }
 }

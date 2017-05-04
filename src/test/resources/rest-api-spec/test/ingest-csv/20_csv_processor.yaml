@@ -11,6 +11,7 @@
                 "csv" : {
                   "field" : "field1",
                   "key_field" : "key",
+                  "max_chars" : 32766,
                   "columns" : {
                     "csv1" : ["a","b"],
                     "csv2" : ["c","d","e"]
