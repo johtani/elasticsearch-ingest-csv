@@ -47,8 +47,8 @@ GET /my-index/my-type/1
 | --- | --- | --- |
 | field   | Field name of where to read the content from. | Yes |
 | columns  | Define multiple maps, each one with a list of column names. | Yes |
-| quote_char | Define the character used to quote CSV fields. If this is not specified the default is a double quote ". | No |
-| separator | Define the column separator value. If this is not specified, the default is a comma ','. | No |
+| quote_char | Define the character used to quote CSV fields. If this is not specified the default is a double quote `"`. | No |
+| separator | Define the column separator value. If this is not specified, the default is a comma `,`. | No |
 | key_field | Define the field where to save the key value of the matching pattern in `columns` (for example `csv_pattern1`,`csv_pattern2` or `csv_pattern3` in the example). If not specified, this field will not be saved. | No |
 | max_chars | Define the max number of characters that a not-analyzed field (or a single analyzed term) can contain. Default is `32766`. | No |
 
