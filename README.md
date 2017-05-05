@@ -65,7 +65,7 @@ This will produce a zip file in `build/distributions`.
 After building the zip file, you can install it like this
 
 ```bash
-bin/plugin install file:///path/to/ingest-csv/build/distribution/ingest-csv-5.3.0.zip
+bin/plugin install file:///path/to/ingest-csv/build/distribution/ingest-csv-0.0.1.zip
 ```
 
 If you need to work on a different version, you can try to change the setting in `gradle.properties` before compiling. Use at your own risk!
