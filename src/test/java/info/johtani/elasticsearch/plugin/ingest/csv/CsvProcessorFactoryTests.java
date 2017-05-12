@@ -50,7 +50,7 @@ public class CsvProcessorFactoryTests extends ESTestCase {
 
     public void testDefaultSettings() throws Exception {
         Map<String, Object> config = getDefaultConfig();
-        String processorTag = randomAsciiOfLength(10);
+        String processorTag = randomAlphaOfLength(10);
         CsvProcessor processor = factory.create(null, processorTag, config);
 
         assertThat(processor.getTag(), equalTo(processorTag));
@@ -61,7 +61,7 @@ public class CsvProcessorFactoryTests extends ESTestCase {
     }
 
     public void testQuoteChar() throws Exception {
-        String processorTag = randomAsciiOfLength(10);
+        String processorTag = randomAlphaOfLength(10);
 
         final Map<String, Object> config = getDefaultConfig();
         config.put("quote_char", "aa");
@@ -83,7 +83,7 @@ public class CsvProcessorFactoryTests extends ESTestCase {
 
         Map<String, Object> config = getDefaultConfig();
         config.put("separator", separator);
-        String processorTag = randomAsciiOfLength(10);
+        String processorTag = randomAlphaOfLength(10);
 
         IllegalArgumentException e = expectThrows(IllegalArgumentException.class,
             () -> factory.create(null, processorTag, config));
@@ -100,7 +100,7 @@ public class CsvProcessorFactoryTests extends ESTestCase {
     public void testColumns() throws Exception {
         Map<String, Object> config = getDefaultConfig();
         config.put("columns", new ArrayList<>());
-        String processorTag = randomAsciiOfLength(10);
+        String processorTag = randomAlphaOfLength(10);
 
         IllegalArgumentException e = expectThrows(IllegalArgumentException.class,
             () -> factory.create(null, processorTag, config));
