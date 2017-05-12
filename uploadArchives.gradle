@@ -1,10 +1,3 @@
-String askPassword(prompt) {
-    "${System.console().readPassword(prompt)}"
-}
-ext.'signing.password' = askPassword("Enter password for PGP key ${property('signing.keyId')}: ")
-ext.'sonatypePassword' = askPassword("Enter password for ${sonatypeUsername}@oss.sonatype.org: ")
-
-
 artifacts {
     archives javadocJar, sourcesJar
 }
