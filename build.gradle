@@ -24,6 +24,14 @@ esplugin {
   description 'Ingest CSV processor parses CSV data and stores it as individual fields'
   classname 'info.johtani.elasticsearch.plugin.ingest.csv.IngestCsvPlugin'
 }
+ext.projectSubstitutions = [:]
+
+project.licenseFile= file('LICENSE.txt')
+project.noticeFile= file('NOTICE.txt')
+
+subprojects {
+  ext.projectSubstitutions += ["info.johtani.elasticsearch.plugin.ingest:ingest-csv:${elasticsearchVersion}": ':ingest-csv:plugin']
+}
 
 // In this section you declare the dependencies for your production and test code
 // Note, the two dependencies are not really needed as the buildscript dependency gets them in already
