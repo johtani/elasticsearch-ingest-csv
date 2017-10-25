@@ -7,6 +7,7 @@ This filter can also parse data with any separator, not just commas.
 
 | ES version | Command |
 | ---------- | ------- |
+| 5.6.3 | `./bin/elasticsearch-plugin install https://oss.sonatype.org/service/local/repositories/releases/content/info/johtani/elasticsearch/plugin/ingest/ingest-csv/5.6.3.0/ingest-csv-5.6.3.0.zip` |
 | 5.5.0 | `./bin/elasticsearch-plugin install https://oss.sonatype.org/service/local/repositories/releases/content/info/johtani/elasticsearch/plugin/ingest/ingest-csv/5.5.0.0/ingest-csv-5.5.0.0.zip` |
 
 ## Usage
