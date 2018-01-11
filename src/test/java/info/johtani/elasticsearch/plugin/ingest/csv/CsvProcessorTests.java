@@ -38,7 +38,7 @@ public class CsvProcessorTests extends ESTestCase {
 
     @BeforeClass
     public static void defaultSettings() {
-        
+
         defaultColumns.put( "csv1", new ArrayList<>( Arrays.asList("a","b") ) );
 //        defaultColumns.put( "csv2", new ArrayList<>( Arrays.asList("c","d","e") ) );
     }
@@ -48,7 +48,7 @@ public class CsvProcessorTests extends ESTestCase {
         document.put("source_field", "a_value, b_value");
         IngestDocument ingestDocument = RandomDocumentPicks.randomIngestDocument(random(), document);
 
-        CsvProcessor processor = new CsvProcessor(randomAsciiOfLength(10), "source_field", defaultColumns, '\"', ',', "", 32766);
+        CsvProcessor processor = new CsvProcessor(randomAlphaOfLength(10), "source_field", defaultColumns, '\"', ',', "", 32766);
         processor.execute(ingestDocument);
         Map<String, Object> data = ingestDocument.getSourceAndMetadata();
 
@@ -64,7 +64,7 @@ public class CsvProcessorTests extends ESTestCase {
         documentShort.put("source_field", "a_value");
         IngestDocument ingestDocumentShort = RandomDocumentPicks.randomIngestDocument(random(), documentShort);
 
-        CsvProcessor processor = new CsvProcessor(randomAsciiOfLength(10), "source_field", defaultColumns, '\"', ',', "", 32766);
+        CsvProcessor processor = new CsvProcessor(randomAlphaOfLength(10), "source_field", defaultColumns, '\"', ',', "", 32766);
 
         IllegalArgumentException e = expectThrows(IllegalArgumentException.class, () -> processor.execute(ingestDocumentShort));
         assertThat(e.getMessage(), equalTo("field[source_field] size [1] doesn't match header size [2]."));
@@ -82,7 +82,7 @@ public class CsvProcessorTests extends ESTestCase {
         document.put("source_field", "");
         IngestDocument ingestDocument = RandomDocumentPicks.randomIngestDocument(random(), document);
 
-        CsvProcessor processor = new CsvProcessor(randomAsciiOfLength(10), "source_field", defaultColumns, '\"', ',', "", 32766);
+        CsvProcessor processor = new CsvProcessor(randomAlphaOfLength(10), "source_field", defaultColumns, '\"', ',', "", 32766);
 
         IllegalArgumentException e = expectThrows(IllegalArgumentException.class, () -> processor.execute(ingestDocument));
         assertThat(e.getMessage(), equalTo("field[source_field] is empty string."));
@@ -93,7 +93,7 @@ public class CsvProcessorTests extends ESTestCase {
         document.put("source_field", "a_value, b_value");
         IngestDocument ingestDocument = RandomDocumentPicks.randomIngestDocument(random(), document);
 
-        CsvProcessor processor = new CsvProcessor(randomAsciiOfLength(10), "source_field", defaultColumns, '\"', ',', "key", 32766);
+        CsvProcessor processor = new CsvProcessor(randomAlphaOfLength(10), "source_field", defaultColumns, '\"', ',', "key", 32766);
         processor.execute(ingestDocument);
         Map<String, Object> data = ingestDocument.getSourceAndMetadata();
 
@@ -102,4 +102,3 @@ public class CsvProcessorTests extends ESTestCase {
     }
 
 }
-
