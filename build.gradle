@@ -11,16 +11,13 @@ buildscript {
 }
 
 group = 'info.johtani.elasticsearch.plugin.ingest'
-version = "0.0.2"
+version = "0.0.3"
 
 apply plugin: 'java'
 apply plugin: 'elasticsearch.esplugin'
 apply plugin: 'idea'
 apply plugin: 'maven'
 apply plugin: 'signing'
-
-// this is temporal and will be fixed in 6.0
-ext.projectSubstitutions = [:]
 
 // license of this project
 licenseFile = rootProject.file('LICENSE.txt')
