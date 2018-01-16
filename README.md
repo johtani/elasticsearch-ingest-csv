@@ -7,6 +7,7 @@ This filter can also parse data with any separator, not just commas.
 
 | ES version | Command |
 | ---------- | ------- |
+| 6.1.1 | `./bin/elasticsearch-plugin install https://oss.sonatype.org/service/local/repositories/releases/content/info/johtani/elasticsearch/plugin/ingest/ingest-csv/6.1.1.0/ingest-csv-6.1.1.0.zip`
 | 6.0.0 | `./bin/elasticsearch-plugin install https://oss.sonatype.org/service/local/repositories/releases/content/info/johtani/elasticsearch/plugin/ingest/ingest-csv/6.0.0.0/ingest-csv-6.0.0.0.zip`
 | 5.6.3 | `./bin/elasticsearch-plugin install https://oss.sonatype.org/service/local/repositories/releases/content/info/johtani/elasticsearch/plugin/ingest/ingest-csv/5.6.3.0/ingest-csv-5.6.3.0.zip` |
 | 5.5.0 | `./bin/elasticsearch-plugin install https://oss.sonatype.org/service/local/repositories/releases/content/info/johtani/elasticsearch/plugin/ingest/ingest-csv/5.5.0.0/ingest-csv-5.5.0.0.zip` |
@@ -34,6 +35,8 @@ PUT /my-index/my-type/1?pipeline=csv-pipeline
 }
 
 GET /my-index/my-type/1
+
+then, the doc has 3 fields like this.
 {
   "my_field" : "a_value,b_value",
   "a" : "a_value",
