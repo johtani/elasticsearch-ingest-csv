@@ -19,9 +19,6 @@ apply plugin: 'idea'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-// this is temporal and will be fixed in 6.0
-ext.projectSubstitutions = [:]
-
 // license of this project
 licenseFile = rootProject.file('LICENSE.txt')
 // copyright notices
