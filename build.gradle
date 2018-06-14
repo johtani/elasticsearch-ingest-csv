@@ -14,8 +14,8 @@ group = 'info.johtani.elasticsearch.plugin.ingest'
 version = "${elasticsearchVersion}.0"
 
 apply plugin: 'java'
-apply plugin: 'elasticsearch.esplugin'
 apply plugin: 'idea'
+apply plugin: 'elasticsearch.esplugin'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
