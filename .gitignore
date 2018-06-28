@@ -1,8 +1,6 @@
 .gradle
 .local*
 build/
-gradlew
-gradle
 
 # Ignore Gradle GUI config
 gradle-app.setting
