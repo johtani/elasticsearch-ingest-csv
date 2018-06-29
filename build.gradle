@@ -10,12 +10,16 @@ buildscript {
   }
 }
 
+plugins {
+  id "co.riiid.gradle" version "0.4.2"
+}
+
 group = 'info.johtani.elasticsearch.plugin.ingest'
 version = "${elasticsearchVersion}"
 
 apply plugin: 'java'
-apply plugin: 'elasticsearch.esplugin'
 apply plugin: 'idea'
+apply plugin: 'elasticsearch.esplugin'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
@@ -42,6 +46,24 @@ dependencies {
   compile 'com.univocity:univocity-parsers:2.3.1'
 
   testCompile "org.elasticsearch.test:framework:${elasticsearchVersion}"
+}
+
+githubRelease.doFirst {
+  if (!System.getProperty('GITHUB_TOKEN', '')) {
+    throw new Exception('Missing property GITHUB_TOKEN')
+  }
+
+  // check if zip file is there
+  assert file("build/distributions/ingest-csv-${elasticsearchVersion}.zip").exists()
+
+  // configuration
+  github {
+    owner = 'sektorcap'
+    repo = 'elasticsearch-ingest-csv'
+    token = System.getProperty('GITHUB_TOKEN')
+    tagName = "${elasticsearchVersion}"
+    assets = [ "build/distributions/ingest-csv-${elasticsearchVersion}.zip" ]
+  }
 }
 
 // Set to false to not use elasticsearch checkstyle rules

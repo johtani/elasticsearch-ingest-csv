@@ -1,8 +1,6 @@
 .gradle
 .local*
 build/
-gradlew
-gradle
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -17,3 +15,4 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 
 gradle.properties
+github-release.sh
