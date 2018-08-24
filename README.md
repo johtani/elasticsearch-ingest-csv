@@ -7,6 +7,7 @@ This filter can also parse data with any separator, not just commas.
 
 | ES version | Command |
 | ---------- | ------- |
+| 6.4.0 | `./bin/elasticsearch-plugin install https://oss.sonatype.org/service/local/repositories/releases/content/info/johtani/elasticsearch/plugin/ingest/ingest-csv/6.4.0.0/ingest-csv-6.4.0.0.zip` |
 | 6.3.2 | `./bin/elasticsearch-plugin install https://oss.sonatype.org/service/local/repositories/releases/content/info/johtani/elasticsearch/plugin/ingest/ingest-csv/6.3.2.0/ingest-csv-6.3.2.0.zip` |
 | 6.3.1 | `./bin/elasticsearch-plugin install https://oss.sonatype.org/service/local/repositories/releases/content/info/johtani/elasticsearch/plugin/ingest/ingest-csv/6.3.1.0/ingest-csv-6.3.1.0.zip` |
 | 6.3.0 | `./bin/elasticsearch-plugin install https://oss.sonatype.org/service/local/repositories/releases/content/info/johtani/elasticsearch/plugin/ingest/ingest-csv/6.3.0.0/ingest-csv-6.3.0.0.zip` |
@@ -69,7 +70,7 @@ then, the doc has 3 fields like this.
 In order to install this plugin, you need to create a zip distribution first by running
 
 ```bash
-gradle clean check
+./gradlew clean check
 ```
 
 This will produce a zip file in `build/distributions`.
