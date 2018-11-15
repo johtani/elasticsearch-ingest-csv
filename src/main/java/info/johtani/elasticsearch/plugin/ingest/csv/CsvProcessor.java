@@ -49,7 +49,7 @@ public class CsvProcessor extends AbstractProcessor {
     }
 
     @Override
-    public void execute(IngestDocument ingestDocument) throws Exception {
+    public IngestDocument execute(IngestDocument ingestDocument) throws Exception {
         String content = ingestDocument.getFieldValue(field, String.class);
 
         if (Strings.hasLength(content)) {
@@ -68,7 +68,7 @@ public class CsvProcessor extends AbstractProcessor {
             // TODO should we have ignoreMissing flag?
             throw new IllegalArgumentException("field[" + this.field + "] is empty string.");
         }
-
+        return ingestDocument;
     }
 
     @Override

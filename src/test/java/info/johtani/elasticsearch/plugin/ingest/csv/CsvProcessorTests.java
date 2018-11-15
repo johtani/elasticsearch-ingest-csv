@@ -48,8 +48,7 @@ public class CsvProcessorTests extends ESTestCase {
         IngestDocument ingestDocument = RandomDocumentPicks.randomIngestDocument(random(), document);
 
         CsvProcessor processor = new CsvProcessor(randomAlphaOfLength(10), "source_field", defaultColumns, '\"', ',');
-        processor.execute(ingestDocument);
-        Map<String, Object> data = ingestDocument.getSourceAndMetadata();
+        Map<String, Object> data = processor.execute(ingestDocument).getSourceAndMetadata();
 
         assertThat(data, hasKey("a"));
         assertThat(data.get("a"), is("a_value"));
