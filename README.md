@@ -81,6 +81,13 @@ then, the doc has 3 fields like this.
 
 ## Setup
 
+# Install Java 12 + compiler
+
+wget https://download.java.net/java/GA/jdk12/GPL/openjdk-12_linux-x64_bin.tar.gz
+tar -xzf openjdk-12_linux-x64_bin.tar.gz
+export JAVA_HOME=$(pwd)/jdk-12
+export PATH=$(pwd)/jdk-12/bin:$PATH
+
 In order to install this plugin, you need to create a zip distribution first by running
 
 ```bash
