@@ -78,6 +78,8 @@ then, the doc has 3 fields like this.
 | columns  | Define a list of column names. | Yes |
 | quote_char | Define the character used to quote CSV fields. If this is not specified the default is a double quote ". | No |
 | separator | Define the column separator value. If this is not specified, the default is a comma ,. | No |
+| max_chars_per_column | Define the maximum amount of chars a column can have in it, before the plugin gives up.  This is set to limit the amount of memory consumed. Valid values are 2 - 64000. Default is 4096 | No |
+
 
 ## Setup
 

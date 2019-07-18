@@ -110,7 +110,7 @@ public class CsvProcessor extends AbstractProcessor {
             if (Strings.isEmpty(separator) || separator.length() != 1) {
                 throw new IllegalArgumentException("separator must be a character, like , or TAB");
             }
-            int maxCharsPerColumn = readIntProperty(TYPE, tag, config, "maxCharsPerColumn", 4096);
+            int maxCharsPerColumn = readIntProperty(TYPE, tag, config, "max_chars_per_column", 4096);
             if (maxCharsPerColumn < 1 || maxCharsPerColumn > 64000) {
                 throw new IllegalArgumentException("maxCharsPerColumn must be between 1 and 64000 (default 4096)");
             }
