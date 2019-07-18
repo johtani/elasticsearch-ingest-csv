@@ -40,7 +40,8 @@ public class CsvProcessor extends AbstractProcessor {
     private final List<String> columns;
     private final CsvParserSettings csvSettings;
 
-    public CsvProcessor(String tag, String field, List<String> columns, char quoteChar, char separator, int maxCharsPerColumn) throws IOException {
+    public CsvProcessor(String tag, String field, List<String> columns,
+                        char quoteChar, char separator, int maxCharsPerColumn) throws IOException {
         super(tag);
         this.field = field;
         this.columns = columns;
