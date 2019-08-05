@@ -8,10 +8,19 @@ buildscript {
   dependencies {
     classpath "org.elasticsearch.gradle:build-tools:${elasticsearchVersion}"
   }
+
 }
 
 group = 'info.johtani.elasticsearch.plugin.ingest'
 version = "${elasticsearchVersion}.0"
+
+
+
+configurations.all {
+  resolutionStrategy.dependencySubstitution {
+    substitute project(':rest-api-spec') with module ("org.elasticsearch:rest-api-spec:${elasticsearchVersion}")
+  }
+}
 
 apply plugin: 'java'
 apply plugin: 'idea'
@@ -23,14 +32,10 @@ esplugin {
   name 'ingest-csv'
   description 'Ingest CSV processor parses CSV data and stores it as individual fields'
   classname 'info.johtani.elasticsearch.plugin.ingest.csv.IngestCsvPlugin'
+  licenseFile rootProject.file('LICENSE.txt')
+  noticeFile = rootProject.file('NOTICE.txt')
 }
 
-project.licenseFile= file('LICENSE.txt')
-project.noticeFile= file('NOTICE.txt')
-
-subprojects {
-  ext.projectSubstitutions += ["info.johtani.elasticsearch.plugin.ingest:ingest-csv:${elasticsearchVersion}": ':ingest-csv:plugin']
-}
 
 // In this section you declare the dependencies for your production and test code
 // Note, the two dependencies are not really needed as the buildscript dependency gets them in already
@@ -49,3 +54,5 @@ thirdPartyAudit.enabled = false
 if (gradle.startParameter.taskNames.contains('uploadArchives')) {
   apply from: 'uploadArchives.gradle'
 }
+
+
