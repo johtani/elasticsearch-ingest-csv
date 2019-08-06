@@ -10,6 +10,13 @@ buildscript {
   }
 }
 
+// remove this again after 7.3.0
+configurations.all {
+  resolutionStrategy.dependencySubstitution {
+    substitute project(':rest-api-spec') with module ("org.elasticsearch:rest-api-spec:${elasticsearchVersion}")
+  }
+}
+
 group = 'info.johtani.elasticsearch.plugin.ingest'
 version = "${elasticsearchVersion}.0"
 
@@ -27,10 +34,6 @@ esplugin {
 
 project.licenseFile= file('LICENSE.txt')
 project.noticeFile= file('NOTICE.txt')
-
-subprojects {
-  ext.projectSubstitutions += ["info.johtani.elasticsearch.plugin.ingest:ingest-csv:${elasticsearchVersion}": ':ingest-csv:plugin']
-}
 
 // In this section you declare the dependencies for your production and test code
 // Note, the two dependencies are not really needed as the buildscript dependency gets them in already
