@@ -10,13 +10,6 @@ buildscript {
   }
 }
 
-// remove this again after 7.3.0
-configurations.all {
-  resolutionStrategy.dependencySubstitution {
-    substitute project(':rest-api-spec') with module ("org.elasticsearch:rest-api-spec:${elasticsearchVersion}")
-  }
-}
-
 group = 'info.johtani.elasticsearch.plugin.ingest'
 version = "${elasticsearchVersion}.0"
 
@@ -35,12 +28,18 @@ esplugin {
 project.licenseFile= file('LICENSE.txt')
 project.noticeFile= file('NOTICE.txt')
 
+// remove this again after 7.3.1
+configurations.restSpec.withDependencies { dependencies ->
+  dependencies.clear()
+  dependencies.add(project.dependencies.create("org.elasticsearch:rest-api-spec:${elasticsearchVersion}"))
+}
+
 // In this section you declare the dependencies for your production and test code
 // Note, the two dependencies are not really needed as the buildscript dependency gets them in already
 // they are just here as an example
 dependencies {
   compile "org.elasticsearch:elasticsearch:${elasticsearchVersion}"
-  compile 'com.univocity:univocity-parsers:2.3.1'
+  compile 'com.univocity:univocity-parsers:2.8.3'
 
   testCompile "org.elasticsearch.test:framework:${elasticsearchVersion}"
 }
