@@ -55,7 +55,10 @@ public class CsvProcessor extends AbstractProcessor {
         String content = ingestDocument.getFieldValue(field, String.class);
 
         if (Strings.hasLength(content)) {
-             String[] values = parser.parseLine(content);
+            String[] values;
+            synchronized (parser) {
+                values = parser.parseLine(content);
+            }
             if (values.length != this.columns.size()) {
                 // TODO should be error?
                 throw new IllegalArgumentException("field[" + this.field + "] size ["
