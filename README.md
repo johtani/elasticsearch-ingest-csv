@@ -7,10 +7,17 @@ This filter can also parse data with any separator, not just commas.
 
 | ES version | Command |
 | ---------- | ------- |
+| 7.3.2 | `./bin/elasticsearch-plugin install https://oss.sonatype.org/service/local/repositories/releases/content/info/johtani/elasticsearch/plugin/ingest/ingest-csv/7.3.2.0/ingest-csv-7.3.2.0.zip` |
 | 7.3.1 | `./bin/elasticsearch-plugin install https://oss.sonatype.org/service/local/repositories/releases/content/info/johtani/elasticsearch/plugin/ingest/ingest-csv/7.3.1.0/ingest-csv-7.3.1.0.zip` |
 | 7.3.0 | `./bin/elasticsearch-plugin install https://oss.sonatype.org/service/local/repositories/releases/content/info/johtani/elasticsearch/plugin/ingest/ingest-csv/7.3.0.0/ingest-csv-7.3.0.0.zip` |
 | 7.2.0 | `./bin/elasticsearch-plugin install https://oss.sonatype.org/service/local/repositories/releases/content/info/johtani/elasticsearch/plugin/ingest/ingest-csv/7.2.0.0/ingest-csv-7.2.0.0.zip` |
 | 7.0.0 | `./bin/elasticsearch-plugin install https://oss.sonatype.org/service/local/repositories/releases/content/info/johtani/elasticsearch/plugin/ingest/ingest-csv/7.0.0.0/ingest-csv-7.0.0.0.zip` |
+
+<details>
+  <summary>Older versions (6.7.1 - 5.5.0) </summary>
+  
+| ES version | Command |
+| ---------- | ------- |
 | 6.7.1 | `./bin/elasticsearch-plugin install https://oss.sonatype.org/service/local/repositories/releases/content/info/johtani/elasticsearch/plugin/ingest/ingest-csv/6.7.1.0/ingest-csv-6.7.1.0.zip` |
 | 6.7.0 | `./bin/elasticsearch-plugin install https://oss.sonatype.org/service/local/repositories/releases/content/info/johtani/elasticsearch/plugin/ingest/ingest-csv/6.7.0.0/ingest-csv-6.7.0.0.zip` |
 | 6.6.2 | `./bin/elasticsearch-plugin install https://oss.sonatype.org/service/local/repositories/releases/content/info/johtani/elasticsearch/plugin/ingest/ingest-csv/6.6.2.0/ingest-csv-6.6.2.0.zip` |
@@ -40,6 +47,8 @@ This filter can also parse data with any separator, not just commas.
 | 6.0.0 | `./bin/elasticsearch-plugin install https://oss.sonatype.org/service/local/repositories/releases/content/info/johtani/elasticsearch/plugin/ingest/ingest-csv/6.0.0.0/ingest-csv-6.0.0.0.zip` |
 | 5.6.3 | `./bin/elasticsearch-plugin install https://oss.sonatype.org/service/local/repositories/releases/content/info/johtani/elasticsearch/plugin/ingest/ingest-csv/5.6.3.0/ingest-csv-5.6.3.0.zip` |
 | 5.5.0 | `./bin/elasticsearch-plugin install https://oss.sonatype.org/service/local/repositories/releases/content/info/johtani/elasticsearch/plugin/ingest/ingest-csv/5.5.0.0/ingest-csv-5.5.0.0.zip` |
+
+</details>
 
 ## Usage
 
