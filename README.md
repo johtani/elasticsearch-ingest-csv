@@ -120,3 +120,11 @@ bin/plugin install file:///path/to/ingest-csv/build/distribution/ingest-csv-0.0.
 * Need more test, like using separator and quote_char 
 * and todos...
 
+## Thanks & More information about making Ingest Processor Plugin
+
+Thanks for making great cookiecutter template @spinscale !
+If you are interested in making Ingest Processor Plugin, 
+you should use https://github.com/spinscale/cookiecutter-elasticsearch-ingest-processor
+
+
+
