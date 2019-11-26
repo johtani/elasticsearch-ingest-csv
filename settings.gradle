@@ -1,2 +1,1 @@
-include ':rest-api-spec'
 rootProject.name = 'ingest-csv'

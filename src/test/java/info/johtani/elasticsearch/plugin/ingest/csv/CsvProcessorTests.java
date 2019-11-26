@@ -87,7 +87,7 @@ public class CsvProcessorTests extends ESTestCase {
     }
 
     public void testManyTimes() throws Exception {
-        CsvProcessor processor = new CsvProcessor(randomAlphaOfLength(10), "source_field", defaultColumns, '\"', ',');
+        CsvProcessor processor = new CsvProcessor(randomAlphaOfLength(10), "source_field", defaultColumns, '\"', ',',4096);
         int times = 50000;
 
         logger.info("start");
