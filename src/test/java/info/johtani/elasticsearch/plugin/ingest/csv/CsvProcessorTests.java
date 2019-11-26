@@ -86,6 +86,27 @@ public class CsvProcessorTests extends ESTestCase {
         assertThat(e.getMessage(), equalTo("field[source_field] is empty string."));
     }
 
+    public void testManyTimes() throws Exception {
+        CsvProcessor processor = new CsvProcessor(randomAlphaOfLength(10), "source_field", defaultColumns, '\"', ',');
+        int times = 50000;
+
+        logger.info("start");
+        long startTime = System.currentTimeMillis();
+        for (int i = 0; i < times; i++) {
+            Map<String, Object> document = new HashMap<>();
+            document.put("source_field", "a_value, b_value");
+            IngestDocument ingestDocument = RandomDocumentPicks.randomIngestDocument(random(), document);
+
+
+            Map<String, Object> data = processor.execute(ingestDocument).getSourceAndMetadata();
+
+            assertThat(data, hasKey("a"));
+            assertThat(data.get("a"), is("a_value"));
+            assertThat(data, hasKey("b"));
+            assertThat(data.get("b"), is("b_value"));
+        }
+        logger.info("end. Loop is " + times + " times. Process Time is " + String.valueOf(System.currentTimeMillis() - startTime) + " ms");
+    }
 
 
 }

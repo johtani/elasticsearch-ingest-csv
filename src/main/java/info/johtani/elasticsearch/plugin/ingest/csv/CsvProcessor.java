@@ -39,6 +39,7 @@ public class CsvProcessor extends AbstractProcessor {
     private final String field;
     private final List<String> columns;
     private final CsvParserSettings csvSettings;
+    private final CsvParser parser;
 
     public CsvProcessor(String tag, String field, List<String> columns,
                         char quoteChar, char separator, int maxCharsPerColumn) throws IOException {
@@ -49,6 +50,7 @@ public class CsvProcessor extends AbstractProcessor {
         csvSettings.getFormat().setQuote(quoteChar);
         csvSettings.getFormat().setDelimiter(separator);
         csvSettings.setMaxCharsPerColumn(maxCharsPerColumn);
+        parser = new CsvParser(this.csvSettings);
     }
 
     @Override
@@ -56,8 +58,10 @@ public class CsvProcessor extends AbstractProcessor {
         String content = ingestDocument.getFieldValue(field, String.class);
 
         if (Strings.hasLength(content)) {
-            CsvParser parser = new CsvParser(this.csvSettings);
-            String[] values = parser.parseLine(content);
+            String[] values;
+            synchronized (parser) {
+                values = parser.parseLine(content);
+            }
             if (values.length != this.columns.size()) {
                 // TODO should be error?
                 throw new IllegalArgumentException("field[" + this.field + "] size ["
