@@ -1,3 +1,7 @@
+//workaround for 7.5.0. see https://github.com/elastic/elasticsearch/issues/49787
+import org.elasticsearch.gradle.testclusters.TestClustersRegistry
+import org.elasticsearch.gradle.testclusters.TestClustersPlugin
+
 buildscript {
   repositories {
     mavenLocal()
@@ -28,11 +32,7 @@ esplugin {
 project.licenseFile= file('LICENSE.txt')
 project.noticeFile= file('NOTICE.txt')
 
-// remove this again after 7.3.1
-configurations.restSpec.withDependencies { dependencies ->
-  dependencies.clear()
-  dependencies.add(project.dependencies.create("org.elasticsearch:rest-api-spec:${elasticsearchVersion}"))
-}
+
 
 // In this section you declare the dependencies for your production and test code
 // Note, the two dependencies are not really needed as the buildscript dependency gets them in already
@@ -42,6 +42,8 @@ dependencies {
   compile 'com.univocity:univocity-parsers:2.8.3'
 
   testCompile "org.elasticsearch.test:framework:${elasticsearchVersion}"
+  //https://github.com/elastic/elasticsearch/pull/49813
+  testCompile "org.elasticsearch.distribution.integ-test-zip:elasticsearch:${elasticsearchVersion}@zip"
 }
 
 dependencyLicenses.enabled = false
@@ -51,3 +53,15 @@ thirdPartyAudit.enabled = false
 if (gradle.startParameter.taskNames.contains('uploadArchives')) {
   apply from: 'uploadArchives.gradle'
 }
+
+//workaround for 7.5.0. see https://github.com/elastic/elasticsearch/issues/49787
+configurations.whenObjectAdded { c ->
+  if (c.name == 'elasticsearch_7.5.0_integ_test_zip_null') {
+    project.dependencies.add('elasticsearch_7.5.0_integ_test_zip_null', 'org.elasticsearch.distribution.integ-test-zip:elasticsearch:7.5.0@zip')
+  }
+}
+
+TestClustersRegistry registry = project.rootProject.extensions.create("testClustersRegistry", TestClustersRegistry)
+TestClustersPlugin.configureClaimClustersHook(project.gradle, registry)
+TestClustersPlugin.configureStartClustersHook(project.gradle, registry)
+TestClustersPlugin.configureStopClustersHook(project.gradle, registry)
