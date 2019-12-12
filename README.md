@@ -3,6 +3,11 @@
 This processor can parse CSV data and stores it as individual fields.
 This filter can also parse data with any separator, not just commas.
 
+### Caution
+
+[Official CSV ingest processor will come on *7.6.0*](https://github.com/elastic/elasticsearch/pull/50083).
+This plugin will deprecate *7.6.0.*
+
 ## Installation
 
 | ES version | Command |
