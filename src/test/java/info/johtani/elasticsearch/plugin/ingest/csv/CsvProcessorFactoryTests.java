@@ -113,5 +113,22 @@ public class CsvProcessorFactoryTests extends ESTestCase {
             () -> factory.create(null, processorTag, configEmpty));
         assertThat(e.getMessage(), equalTo("columns is missing"));
     }
+    public void testMaxChars() throws Exception {
+        Map<String, Object> config = getDefaultConfig();
+        config.put("max_chars_per_column", 65000);
+        String processorTag = randomAlphaOfLength(10);
+
+        IllegalArgumentException e = expectThrows(IllegalArgumentException.class,
+            () -> factory.create(null, processorTag, config));
+        assertThat(e.getMessage(), equalTo("maxCharsPerColumn must be between 1 and 64000 (default 4096)"));
+
+        final Map<String, Object> configinvalid = getDefaultConfig();
+        configinvalid.put("max_chars_per_column", 0);
+
+        IllegalArgumentException epe = expectThrows(IllegalArgumentException.class,
+            () -> factory.create(null, processorTag, configinvalid));
+        assertThat(e.getMessage(), equalTo("maxCharsPerColumn must be between 1 and 64000 (default 4096)"));
+    }
+
 
 }

@@ -30,6 +30,7 @@ import java.util.Map;
 
 import static org.elasticsearch.ingest.ConfigurationUtils.readList;
 import static org.elasticsearch.ingest.ConfigurationUtils.readStringProperty;
+import static org.elasticsearch.ingest.ConfigurationUtils.readIntProperty;
 
 public class CsvProcessor extends AbstractProcessor {
 
@@ -40,13 +41,15 @@ public class CsvProcessor extends AbstractProcessor {
     private final CsvParserSettings csvSettings;
     private final CsvParser parser;
 
-    public CsvProcessor(String tag, String field, List<String> columns, char quoteChar, char separator) throws IOException {
+    public CsvProcessor(String tag, String field, List<String> columns,
+                        char quoteChar, char separator, int maxCharsPerColumn) throws IOException {
         super(tag);
         this.field = field;
         this.columns = columns;
         csvSettings = new CsvParserSettings();
         csvSettings.getFormat().setQuote(quoteChar);
         csvSettings.getFormat().setDelimiter(separator);
+        csvSettings.setMaxCharsPerColumn(maxCharsPerColumn);
         parser = new CsvParser(this.csvSettings);
     }
 
@@ -111,8 +114,11 @@ public class CsvProcessor extends AbstractProcessor {
             if (Strings.isEmpty(separator) || separator.length() != 1) {
                 throw new IllegalArgumentException("separator must be a character, like , or TAB");
             }
-
-            return new CsvProcessor(tag, field, columns, quoteChar.charAt(0), separator.charAt(0));
+            int maxCharsPerColumn = readIntProperty(TYPE, tag, config, "max_chars_per_column", 4096);
+            if (maxCharsPerColumn < 1 || maxCharsPerColumn > 64000) {
+                throw new IllegalArgumentException("maxCharsPerColumn must be between 1 and 64000 (default 4096)");
+            }
+            return new CsvProcessor(tag, field, columns, quoteChar.charAt(0), separator.charAt(0),maxCharsPerColumn);
         }
     }
 }

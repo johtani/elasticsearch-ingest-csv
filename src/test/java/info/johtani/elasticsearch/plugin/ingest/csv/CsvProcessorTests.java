@@ -47,7 +47,7 @@ public class CsvProcessorTests extends ESTestCase {
         document.put("source_field", "a_value, b_value");
         IngestDocument ingestDocument = RandomDocumentPicks.randomIngestDocument(random(), document);
 
-        CsvProcessor processor = new CsvProcessor(randomAlphaOfLength(10), "source_field", defaultColumns, '\"', ',');
+        CsvProcessor processor = new CsvProcessor(randomAlphaOfLength(10), "source_field", defaultColumns, '\"', ',',4096);
         Map<String, Object> data = processor.execute(ingestDocument).getSourceAndMetadata();
 
         assertThat(data, hasKey("a"));
@@ -62,7 +62,7 @@ public class CsvProcessorTests extends ESTestCase {
         documentShort.put("source_field", "a_value");
         IngestDocument ingestDocumentShort = RandomDocumentPicks.randomIngestDocument(random(), documentShort);
 
-        CsvProcessor processor = new CsvProcessor(randomAlphaOfLength(10), "source_field", defaultColumns, '\"', ',');
+        CsvProcessor processor = new CsvProcessor(randomAlphaOfLength(10), "source_field", defaultColumns, '\"', ',',4096);
 
         IllegalArgumentException e = expectThrows(IllegalArgumentException.class, () -> processor.execute(ingestDocumentShort));
         assertThat(e.getMessage(), equalTo("field[source_field] size [1] doesn't match header size [" + defaultColumns.size() + "]."));
@@ -80,14 +80,14 @@ public class CsvProcessorTests extends ESTestCase {
         document.put("source_field", "");
         IngestDocument ingestDocument = RandomDocumentPicks.randomIngestDocument(random(), document);
 
-        CsvProcessor processor = new CsvProcessor(randomAlphaOfLength(10), "source_field", defaultColumns, '\"', ',');
+        CsvProcessor processor = new CsvProcessor(randomAlphaOfLength(10), "source_field", defaultColumns, '\"', ',',4096);
 
         IllegalArgumentException e = expectThrows(IllegalArgumentException.class, () -> processor.execute(ingestDocument));
         assertThat(e.getMessage(), equalTo("field[source_field] is empty string."));
     }
 
     public void testManyTimes() throws Exception {
-        CsvProcessor processor = new CsvProcessor(randomAlphaOfLength(10), "source_field", defaultColumns, '\"', ',');
+        CsvProcessor processor = new CsvProcessor(randomAlphaOfLength(10), "source_field", defaultColumns, '\"', ',',4096);
         int times = 50000;
 
         logger.info("start");
