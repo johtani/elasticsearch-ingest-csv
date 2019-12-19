@@ -42,8 +42,6 @@ dependencies {
   compile 'com.univocity:univocity-parsers:2.8.3'
 
   testCompile "org.elasticsearch.test:framework:${elasticsearchVersion}"
-  //https://github.com/elastic/elasticsearch/pull/49813
-  testCompile "org.elasticsearch.distribution.integ-test-zip:elasticsearch:${elasticsearchVersion}@zip"
 }
 
 dependencyLicenses.enabled = false
@@ -54,13 +52,7 @@ if (gradle.startParameter.taskNames.contains('uploadArchives')) {
   apply from: 'uploadArchives.gradle'
 }
 
-//workaround for 7.5.0. see https://github.com/elastic/elasticsearch/issues/49787
-configurations.whenObjectAdded { c ->
-  if (c.name == 'elasticsearch_7.5.0_integ_test_zip_null') {
-    project.dependencies.add('elasticsearch_7.5.0_integ_test_zip_null', 'org.elasticsearch.distribution.integ-test-zip:elasticsearch:7.5.0@zip')
-  }
-}
-
+//workaround for 7.5.1. see https://github.com/elastic/elasticsearch/issues/49787
 TestClustersRegistry registry = project.rootProject.extensions.create("testClustersRegistry", TestClustersRegistry)
 TestClustersPlugin.configureClaimClustersHook(project.gradle, registry)
 TestClustersPlugin.configureStartClustersHook(project.gradle, registry)

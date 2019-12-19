@@ -3,15 +3,16 @@
 This processor can parse CSV data and stores it as individual fields.
 This filter can also parse data with any separator, not just commas.
 
-### Caution
+# Caution
 
-[Official CSV ingest processor will come on *7.6.0*](https://github.com/elastic/elasticsearch/pull/50083).
+[Official CSV ingest processor will release on *7.6.0*](https://github.com/elastic/elasticsearch/pull/50083).
 This plugin will deprecate *7.6.0.*
 
 ## Installation
 
 | ES version | Command |
 | ---------- | ------- |
+| 7.5.1 | `./bin/elasticsearch-plugin install https://github.com/johtani/elasticsearch-ingest-csv/releases/download/7.5.1/ingest-csv-7.5.1.0.zip` |
 | 7.5.0 | `./bin/elasticsearch-plugin install https://github.com/johtani/elasticsearch-ingest-csv/releases/download/7.5.0/ingest-csv-7.5.0.0.zip` |
 | 7.4.2 | `./bin/elasticsearch-plugin install https://oss.sonatype.org/service/local/repositories/releases/content/info/johtani/elasticsearch/plugin/ingest/ingest-csv/7.4.2.0/ingest-csv-7.4.2.0.zip` |
 | 7.4.1 | `./bin/elasticsearch-plugin install https://oss.sonatype.org/service/local/repositories/releases/content/info/johtani/elasticsearch/plugin/ingest/ingest-csv/7.4.1.0/ingest-csv-7.4.1.0.zip` |
