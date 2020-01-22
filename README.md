@@ -12,6 +12,7 @@ This plugin will deprecate *7.6.0.*
 
 | ES version | Command |
 | ---------- | ------- |
+| 7.5.2 | `./bin/elasticsearch-plugin install https://github.com/johtani/elasticsearch-ingest-csv/releases/download/7.5.2/ingest-csv-7.5.2.0.zip` |
 | 7.5.1 | `./bin/elasticsearch-plugin install https://github.com/johtani/elasticsearch-ingest-csv/releases/download/7.5.1/ingest-csv-7.5.1.0.zip` |
 | 7.5.0 | `./bin/elasticsearch-plugin install https://github.com/johtani/elasticsearch-ingest-csv/releases/download/7.5.0/ingest-csv-7.5.0.0.zip` |
 | 7.4.2 | `./bin/elasticsearch-plugin install https://oss.sonatype.org/service/local/repositories/releases/content/info/johtani/elasticsearch/plugin/ingest/ingest-csv/7.4.2.0/ingest-csv-7.4.2.0.zip` |
